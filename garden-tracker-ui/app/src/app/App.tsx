@@ -1,7 +1,7 @@
+import { LandingPage } from "@/pages/landing/Landing"
+
 const App = () => {
-  return (
-    <h1>Garden Tracker</h1>
-  )
+  return <LandingPage/>
 }
 
 export default App
