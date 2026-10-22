@@ -59,7 +59,7 @@ export function LoginPage() {
               <Button type="reset" variant="outline">
                 Reset
               </Button>
-              <Button type="submit">
+              <Button type="submit" className="bg-green-700 text-white hover:bg-green-800">
                 Login
               </Button>
             </div>

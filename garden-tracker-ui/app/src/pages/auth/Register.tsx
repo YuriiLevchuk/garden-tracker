@@ -66,8 +66,8 @@ export function RegisterPage() {
               <Button type="reset" variant="outline">
                 Reset
               </Button>
-              <Button type="submit">
-                Register
+              <Button type="submit" className="bg-green-700 text-white hover:bg-green-800">
+                Go to Register
               </Button>
             </div>
           </form>

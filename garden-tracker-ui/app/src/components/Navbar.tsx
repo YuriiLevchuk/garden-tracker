@@ -1,4 +1,4 @@
-import { ChevronDown, Settings, Sprout } from "lucide-react";
+import { ChevronDown, Settings } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
@@ -8,6 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { SidebarTrigger } from "@/components/ui/sidebar";
+import logo from "@/resources/gt-logo.png";
 
 const features = [
   { name: "Garden Managing", description: "abcd" },
@@ -32,8 +33,8 @@ export function Navbar({ auth = false, dashboard = false }: NavbarProps) {
       <nav aria-label="Main navigation" className="flex h-16 items-center justify-between px-8">
         <div className="flex items-center gap-2">
           {dashboard && <SidebarTrigger />}
-          <Link to="/" className="flex items-center gap-2.5 text-base font-bold text-black">
-            <Sprout aria-hidden="true" className="size-7 fill-black stroke-black" />
+          <Link to="/" className="flex items-center gap-2.5 text-2xl font-bold text-black">
+            <img src={logo} alt="" className="size-10 object-contain" />
             <span>GARDEN TRACKER</span>
           </Link>
         </div>
