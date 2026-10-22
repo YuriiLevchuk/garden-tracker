@@ -68,7 +68,7 @@ export function LoginPage() {
           <div className="mt-16 w-full max-w-xs">
             <p className="text-xs font-medium">Don&apos;t have an account?</p>
             <Button render={<Link to="/register" />} size="lg" className="mt-2 w-full">
-              Register
+              Go to Register
             </Button>
           </div>
         </section>
