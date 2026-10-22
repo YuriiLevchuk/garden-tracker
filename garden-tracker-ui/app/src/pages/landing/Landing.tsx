@@ -2,14 +2,17 @@ import { Navbar } from "@/components/Navbar";
 
 const features = [
   {
+    id: "garden-managing",
     title: "Manage your plants",
     description: "Keep track of everything growing in your garden.",
   },
   {
+    id: "plant-tracking",
     title: "Plan your tasks",
     description: "Stay on top of watering and gardening schedules.",
   },
   {
+    id: "task-calendar",
     title: "Track your garden",
     description: "Organize your garden in one convenient place.",
   },
@@ -32,8 +35,8 @@ export function LandingPage() {
             </p>
 
             <ul className="mt-14 space-y-8">
-              {features.map(({ title, description }) => (
-                <li key={title} className="max-w-md">
+              {features.map(({ id, title, description }) => (
+                <li key={title} id={id} className="max-w-md">
                   <h2 className="flex items-center gap-2 text-base font-bold text-foreground">
                     <span aria-hidden="true" className="size-1.5 rounded-full bg-foreground" />
                     {title}

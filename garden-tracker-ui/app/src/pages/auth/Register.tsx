@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { Navbar } from "@/components/Navbar";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 const gardenImage = "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=1400&q=85";
 
@@ -20,11 +22,12 @@ export function RegisterPage() {
           <form
             className="mt-12 w-full max-w-xs"
             onSubmit={(event) => event.preventDefault()}
-          >
+            >
             <div className="space-y-4">
-              <label className="block text-xs font-medium">
-                Name
+              <div>
+                <Label htmlFor="name" className="text-xs">Name</Label>
                 <Input
+                  id="name"
                   name="name"
                   type="text"
                   placeholder="Jordan Lee"
@@ -32,10 +35,11 @@ export function RegisterPage() {
                   required
                   className="mt-1.5"
                 />
-              </label>
-              <label className="block text-xs font-medium">
-                Username
+              </div>
+              <div>
+                <Label htmlFor="username" className="text-xs">Username</Label>
                 <Input
+                  id="username"
                   name="username"
                   type="text"
                   placeholder="abcd"
@@ -43,10 +47,11 @@ export function RegisterPage() {
                   required
                   className="mt-1.5"
                 />
-              </label>
-              <label className="block text-xs font-medium">
-                Email
+              </div>
+              <div>
+                <Label htmlFor="email" className="text-xs">Email</Label>
                 <Input
+                  id="email"
                   name="email"
                   type="email"
                   placeholder="name@example.com"
@@ -54,27 +59,24 @@ export function RegisterPage() {
                   required
                   className="mt-1.5"
                 />
-              </label>
+              </div>
             </div>
 
             <div className="mt-4 flex gap-2">
-              <button type="reset" className="h-8 rounded-md border border-border px-3 text-xs font-medium hover:bg-muted">
+              <Button type="reset" variant="outline">
                 Reset
-              </button>
-              <button type="submit" className="h-8 rounded-md bg-neutral-900 px-3 text-xs font-medium text-white hover:bg-neutral-700">
+              </Button>
+              <Button type="submit">
                 Register
-              </button>
+              </Button>
             </div>
           </form>
 
           <div className="mt-16 w-full max-w-xs">
             <p className="text-xs font-medium">Already have an account?</p>
-            <Link
-              to="/login"
-              className="mt-2 flex h-9 w-full items-center justify-center rounded-md bg-neutral-900 text-sm font-medium text-white hover:bg-neutral-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-700"
-            >
+            <Button render={<Link to="/login" />} size="lg" className="mt-2 w-full">
               Login
-            </Link>
+            </Button>
           </div>
         </section>
       </main>
