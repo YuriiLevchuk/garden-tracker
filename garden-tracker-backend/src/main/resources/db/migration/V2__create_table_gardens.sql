@@ -1,0 +1,5 @@
+CREATE TABLE gardens(
+    id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    name VARCHAR NOT NULL,
+    user_id INT REFERENCES users(id)
+);
