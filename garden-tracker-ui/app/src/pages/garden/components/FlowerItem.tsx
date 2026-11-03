@@ -14,7 +14,7 @@ export function FlowerItem() {
   return (
     <Dialog>
       <DialogTrigger
-        render={<Item variant="outline" className="min-h-24 cursor-pointer bg-white px-5 py-4 shadow-xs" />}
+        render={<Item variant="outline" className="min-h-24 cursor-pointer bg-white px-5 py-4 shadow-xs transition-shadow hover:shadow-sm" />}
       >
         <ItemMedia variant="icon" className="!self-center !translate-y-0">
           <Flower2 aria-hidden="true" className="size-7 text-foreground" />

@@ -61,7 +61,7 @@ export function GardenPage() {
 
       <SidebarInset className="bg-white">
         <Navbar dashboard />
-        <section aria-label="Plants" className="grid gap-4 p-6 sm:grid-cols-2 sm:p-8">
+        <section aria-label="Plants" className="grid gap-4 p-4 sm:grid-cols-2 sm:p-8 xl:grid-cols-3">
           {Array.from({ length: 8 }, (_, index) => (
             <FlowerItem key={index} />
           ))}

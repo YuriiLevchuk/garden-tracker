@@ -24,7 +24,7 @@ export function LandingPage() {
       <Navbar />
       <main>
         <section className="grid min-h-[calc(100vh-4rem)] border-b border-border bg-white md:grid-cols-2">
-          <div className="flex flex-col justify-center px-8 py-16 sm:px-12 lg:px-16">
+          <div className="flex flex-col justify-center px-6 py-12 sm:px-12 sm:py-16 lg:px-16">
             <h1 className="max-w-md text-4xl font-bold tracking-tight text-foreground md:text-5xl">
               Grow a better garden,
               <span className="text-green-700"> effortlessly.</span>
@@ -34,7 +34,7 @@ export function LandingPage() {
               Plan, organize, and track your garden&apos;s growth from one simple dashboard.
             </p>
 
-            <ul className="mt-14 space-y-8">
+            <ul className="mt-10 space-y-7 sm:mt-14 sm:space-y-8">
               {features.map(({ id, title, description }) => (
                 <li key={title} id={id} className="max-w-md">
                   <h2 className="flex items-center gap-2 text-base font-bold text-foreground">
@@ -47,11 +47,11 @@ export function LandingPage() {
             </ul>
           </div>
 
-          <div className="min-h-80 border-t border-border md:min-h-0 md:border-t-0 md:border-l">
+          <div className="h-80 border-t border-border bg-muted md:h-auto md:border-t-0 md:border-l">
             <img
               src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=1400&q=85"
               alt="A lush garden viewed from above"
-              className="size-full object-cover"
+              className="size-full bg-muted object-cover"
             />
           </div>
         </section>
