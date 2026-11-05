@@ -1,5 +1,5 @@
 import { UserRound } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import { Navbar } from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,11 +15,13 @@ import {
   SidebarMenuItem,
   SidebarProvider,
 } from "@/components/ui/sidebar";
-import { getGardenDashboard } from "@/lib/garden-api";
+import { logout } from "@/lib/auth-api";
+import { getGardenDashboard, type User } from "@/lib/garden-api";
 import { FlowerItem } from "@/pages/garden/components/FlowerItem";
 import { AddPlantButton } from "@/pages/garden/components/AddPlantButton";
 
 export function GardenPage() {
+  const user = useOutletContext<User>();
   const dashboard = getGardenDashboard();
   const selectedGarden = dashboard.gardens[3];
 
@@ -32,8 +34,8 @@ export function GardenPage() {
               <UserRound aria-hidden="true" className="size-4" />
             </span>
             <span>
-              <span className="block">{dashboard.user.email}</span>
-              <Button variant="link" size="xs" render={<Link to="/" />} className="h-auto p-0 text-xs text-muted-foreground">
+              <span className="block">{user.email}</span>
+              <Button variant="link" size="xs" render={<Link to="/" onClick={logout} />} className="h-auto p-0 text-xs text-muted-foreground">
                 Log out
               </Button>
             </span>

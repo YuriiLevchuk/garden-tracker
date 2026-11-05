@@ -32,6 +32,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB:-mydb}
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-myuser}
       SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-mypassword}
+      JWT_SECRET: ${JWT_SECRET:-local-development-secret-change-me-in-production}
     ports:
       - "8080:8080"
 

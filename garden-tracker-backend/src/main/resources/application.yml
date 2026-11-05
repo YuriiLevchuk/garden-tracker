@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mydb
+    username: myuser
+    password: mypassword
+  mvc:
+    problemdetails:
+      enabled: true
+
+app:
+  jwt:
+    # Required, at least 32 characters. Never commit a real value.
+    secret: ${JWT_SECRET}
+    expiration: 24h
