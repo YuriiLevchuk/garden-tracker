@@ -15,12 +15,14 @@ import {
   SidebarMenuItem,
   SidebarProvider,
 } from "@/components/ui/sidebar";
+import { getGardenDashboard } from "@/lib/garden-api";
 import { FlowerItem } from "@/pages/garden/components/FlowerItem";
 import { AddPlantButton } from "@/pages/garden/components/AddPlantButton";
 
-const gardens = ["Garden 1", "Garden 2", "Garden 3", "Garden 4", "Garden 5", "Garden 6", "Garden 7"];
-
 export function GardenPage() {
+  const dashboard = getGardenDashboard();
+  const selectedGarden = dashboard.gardens[3];
+
   return (
     <SidebarProvider>
       <Sidebar>
@@ -30,7 +32,7 @@ export function GardenPage() {
               <UserRound aria-hidden="true" className="size-4" />
             </span>
             <span>
-              <span className="block">User123</span>
+              <span className="block">{dashboard.user.email}</span>
               <Button variant="link" size="xs" render={<Link to="/" />} className="h-auto p-0 text-xs text-muted-foreground">
                 Log out
               </Button>
@@ -43,13 +45,13 @@ export function GardenPage() {
             <SidebarGroupLabel>Gardens</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
-                {gardens.map((garden) => (
-                  <SidebarMenuItem key={garden}>
+                {dashboard.gardens.map((garden) => (
+                  <SidebarMenuItem key={garden.id}>
                     <SidebarMenuButton
-                      isActive={garden === "Garden 4"}
+                      isActive={garden.id === selectedGarden.id}
                       className="data-active:bg-transparent"
                     >
-                      <span>{garden}</span>
+                      <span>{garden.name}</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 ))}
@@ -62,8 +64,12 @@ export function GardenPage() {
       <SidebarInset className="bg-white">
         <Navbar dashboard />
         <section aria-label="Plants" className="grid gap-4 p-4 sm:grid-cols-2 sm:p-8 xl:grid-cols-3">
-          {Array.from({ length: 8 }, (_, index) => (
-            <FlowerItem key={index} />
+          {selectedGarden.plants.map((plant) => (
+            <FlowerItem
+              key={plant.id}
+              plant={plant}
+              tasks={selectedGarden.gardeningTasks.filter((task) => task.plants.some((taskPlant) => taskPlant.id === plant.id))}
+            />
           ))}
         </section>
       </SidebarInset>

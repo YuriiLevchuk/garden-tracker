@@ -30,13 +30,13 @@ export function LoginPage() {
             >
             <div className="space-y-4">
               <div>
-                <Label htmlFor="username" className="text-xs">Username</Label>
+                <Label htmlFor="email" className="text-xs">Email</Label>
                 <Input
-                  id="username"
-                  name="username"
-                  type="text"
-                  placeholder="abcd"
-                  autoComplete="username"
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="name@example.com"
+                  autoComplete="email"
                   required
                   className="mt-1.5"
                 />

@@ -25,30 +25,6 @@ export function RegisterPage() {
             >
             <div className="space-y-4">
               <div>
-                <Label htmlFor="name" className="text-xs">Name</Label>
-                <Input
-                  id="name"
-                  name="name"
-                  type="text"
-                  placeholder="Jordan Lee"
-                  autoComplete="name"
-                  required
-                  className="mt-1.5"
-                />
-              </div>
-              <div>
-                <Label htmlFor="username" className="text-xs">Username</Label>
-                <Input
-                  id="username"
-                  name="username"
-                  type="text"
-                  placeholder="abcd"
-                  autoComplete="username"
-                  required
-                  className="mt-1.5"
-                />
-              </div>
-              <div>
                 <Label htmlFor="email" className="text-xs">Email</Label>
                 <Input
                   id="email"
@@ -56,6 +32,17 @@ export function RegisterPage() {
                   type="email"
                   placeholder="name@example.com"
                   autoComplete="email"
+                  required
+                  className="mt-1.5"
+                />
+              </div>
+              <div>
+                <Label htmlFor="password" className="text-xs">Password</Label>
+                <Input
+                  id="password"
+                  name="password"
+                  type="password"
+                  autoComplete="new-password"
                   required
                   className="mt-1.5"
                 />
