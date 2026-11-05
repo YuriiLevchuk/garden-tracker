@@ -8,6 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { SidebarTrigger } from "@/components/ui/sidebar";
+import { logout } from "@/lib/auth-api";
 import logo from "@/resources/gt-logo.png";
 
 const features = [
@@ -68,7 +69,7 @@ export function Navbar({ auth = false, dashboard = false }: NavbarProps) {
           </Button>
           <Button
             size="lg"
-            render={<Link to={action.to} />}
+            render={<Link to={action.to} onClick={dashboard ? logout : undefined} />}
             className="bg-green-700 text-white hover:bg-green-800"
           >
             {action.label}

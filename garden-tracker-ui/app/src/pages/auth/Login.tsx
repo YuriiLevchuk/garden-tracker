@@ -1,13 +1,32 @@
+import { useState, type FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Navbar } from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { login } from "@/lib/auth-api";
 
 const gardenImage = "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=1400&q=85";
 
 export function LoginPage() {
   const navigate = useNavigate();
+  const [error, setError] = useState<string | null>(null);
+  const [pending, setPending] = useState(false);
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    setError(null);
+    setPending(true);
+    try {
+      await login(String(form.get("email")), String(form.get("password")));
+      navigate("/garden");
+    } catch (cause) {
+      setError((cause as Error).message);
+    } finally {
+      setPending(false);
+    }
+  }
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -23,10 +42,7 @@ export function LoginPage() {
 
           <form
             className="mt-12 w-full max-w-xs"
-            onSubmit={(event) => {
-              event.preventDefault();
-              navigate("/garden");
-            }}
+            onSubmit={handleSubmit}
             >
             <div className="space-y-4">
               <div>
@@ -55,11 +71,13 @@ export function LoginPage() {
               </div>
             </div>
 
+            {error && <p role="alert" className="mt-3 text-xs text-destructive">{error}</p>}
+
             <div className="mt-4 flex gap-2">
               <Button type="reset" variant="outline">
                 Reset
               </Button>
-              <Button type="submit" className="bg-green-700 text-white hover:bg-green-800">
+              <Button type="submit" disabled={pending} className="bg-green-700 text-white hover:bg-green-800">
                 Login
               </Button>
             </div>
