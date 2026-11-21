@@ -45,24 +45,13 @@ public class UserServiceTest {
 
     @Test
     public void givenCurrentUserExists_whenGetCurrentUser_thenReturnUserResponse() {
-        var currentUserId = 1L;
         var user = User.builder()
-                .id(currentUserId)
                 .email(TEST_EMAIL)
                 .password(TEST_PASSWORD)
                 .build();
-        when(userProvider.getCurrentUser()).thenReturn(currentUserId);
-        when(userRepository.findById(currentUserId)).thenReturn(Optional.of(user));
+        when(userProvider.getCurrentUser()).thenReturn(user);
         UserResponse userResponse = userService.getCurrentUser();
         assertEquals(user.getId(), userResponse.id());
         assertEquals(user.getEmail(), userResponse.email());
-    }
-
-    @Test
-    public void givenCurrentUserDoesNotExist_whenGetCurrentUser_thenThrow() {
-        var currentUserId = 1L;
-        when(userProvider.getCurrentUser()).thenReturn(currentUserId);
-        when(userRepository.findById(currentUserId)).thenReturn(Optional.empty());
-        assertThrows(IllegalStateException.class, userService::getCurrentUser);
     }
 }

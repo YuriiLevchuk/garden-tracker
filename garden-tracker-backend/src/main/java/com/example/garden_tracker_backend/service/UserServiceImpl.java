@@ -31,8 +31,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponse getCurrentUser() {
-        return userRepository.findById(userProvider.getCurrentUser())
-                .map(u -> new UserResponse(u.getId(), u.getEmail()))
-                .orElseThrow(IllegalStateException::new);
+        var user = userProvider.getCurrentUser();
+        return new UserResponse(user.getId(), user.getEmail());
     }
 }

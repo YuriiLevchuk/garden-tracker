@@ -32,7 +32,7 @@ public class JwtServiceImpl implements JwtService {
     public String createToken() {
         Instant now = Instant.now();
         return Jwts.builder()
-                .subject(userProvider.getCurrentUser().toString())
+                .subject(userProvider.getCurrentUser().getId().toString())
                 .issuedAt(Date.from(now))
                 .expiration(Date.from(now.plus(expiration)))
                 .signWith(key)

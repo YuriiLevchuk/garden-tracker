@@ -1,5 +1,6 @@
 package com.example.garden_tracker_backend.security;
 
+import com.example.garden_tracker_backend.model.User;
 import com.example.garden_tracker_backend.service.UserProvider;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -23,8 +24,10 @@ public class JwtServiceTest {
 
     @Test
     public void whenCreateToken_thenReturnValidToken() {
-        final Long userId = 1L;
-        when(userProvider.getCurrentUser()).thenReturn(userId);
+        var user = User.builder()
+                .id(1L)
+                .build();
+        when(userProvider.getCurrentUser()).thenReturn(user);
         var token = jwtService.createToken();
 
         Claims claims = Jwts.parser()
@@ -33,17 +36,19 @@ public class JwtServiceTest {
                 .parseSignedClaims(token)
                 .getPayload();
 
-        assertThat(claims.getSubject()).isEqualTo(String.valueOf(userId));
+        assertThat(claims.getSubject()).isEqualTo(String.valueOf(user.getId()));
         assertThat(claims.getIssuedAt()).isInSameMinuteWindowAs(new Date());
         assertThat(claims.getExpiration()).isInSameMinuteWindowAs(new Date(System.currentTimeMillis() + expiration.toMillis()));
     }
 
     @Test
     void whenGetSubject_thenReturnSubjectFromGeneratedToken() {
-        final Long userId = 1L;
-        when(userProvider.getCurrentUser()).thenReturn(userId);
+        var user = User.builder()
+                .id(1L)
+                .build();
+        when(userProvider.getCurrentUser()).thenReturn(user);
         String token = jwtService.createToken();
 
-        assertThat(jwtService.getSubject(token)).isEqualTo(userId);
+        assertThat(jwtService.getSubject(token)).isEqualTo(user.getId());
     }
 }

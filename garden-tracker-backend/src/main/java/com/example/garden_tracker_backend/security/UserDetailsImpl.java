@@ -1,5 +1,6 @@
 package com.example.garden_tracker_backend.security;
 
+import com.example.garden_tracker_backend.model.User;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.jspecify.annotations.Nullable;
@@ -13,9 +14,7 @@ import java.util.List;
 @Getter
 public class UserDetailsImpl implements UserDetails {
 
-    private final Long id;
-    private final String email;
-    private final String password;
+    private final User user;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -24,11 +23,11 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public @Nullable String getPassword() {
-        return password;
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return email;
+        return user.getEmail();
     }
 }

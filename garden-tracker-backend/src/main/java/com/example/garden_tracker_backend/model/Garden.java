@@ -19,7 +19,7 @@ public class Garden {
     private Long id;
     private String name;
     @ManyToOne
-    private User owner;
+    private User user;
     @OneToMany(mappedBy = "garden")
     private List<Plant> plants;
     @OneToMany(mappedBy = "garden")

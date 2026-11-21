@@ -15,14 +15,14 @@ public class UserDetailsServiceImpl implements AppUserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByEmail(username)
-                .map(u -> new UserDetailsImpl(u.getId(), u.getEmail(), u.getPassword()))
+                .map(UserDetailsImpl::new)
                 .orElseThrow(() -> new UsernameNotFoundException("Email not found"));
     }
 
     @Override
     public UserDetails loadUserById(Long id) throws UsernameNotFoundException {
         return userRepository.findById(id)
-                .map(u -> new UserDetailsImpl(u.getId(), u.getEmail(), u.getPassword()))
+                .map(UserDetailsImpl::new)
                 .orElseThrow(() -> new UsernameNotFoundException("Id not found"));
     }
 }

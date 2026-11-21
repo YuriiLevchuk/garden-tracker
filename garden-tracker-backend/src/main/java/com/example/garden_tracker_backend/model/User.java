@@ -19,7 +19,7 @@ public class User {
     private Long id;
     private String email;
     private String password;
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(mappedBy = "user")
     private List<Garden> gardens;
     @OneToMany(mappedBy = "user")
     private List<GardeningTask> gardeningTasks;
