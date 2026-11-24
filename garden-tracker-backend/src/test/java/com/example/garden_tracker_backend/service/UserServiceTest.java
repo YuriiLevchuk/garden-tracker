@@ -44,7 +44,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void givenCurrentUserExists_whenGetCurrentUser_thenReturnUserResponse() {
+    public void whenGetCurrentUser_thenReturnUserResponse() {
         var user = User.builder()
                 .email(TEST_EMAIL)
                 .password(TEST_PASSWORD)

@@ -3,5 +3,5 @@ CREATE TABLE gardening_tasks(
     realization_time TIMESTAMPTZ NOT NULL,
     user_id INT REFERENCES users(id),
     garden_id INT REFERENCES gardens(id),
-    gardening_work_type INT REFERENCES gardening_task_types(id)
+    gardening_work_type_id INT REFERENCES gardening_task_types(id)
 );

@@ -13,13 +13,14 @@ import org.springframework.test.web.servlet.client.RestTestClient;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
+import static com.example.garden_tracker_backend.TestConstants.*;
+
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public abstract class AuthTest extends IntegrationTest {
 
-    private static final String AUTH_USER_EMAIL = "authuser@email.com";
-    private static final String AUTH_USER_PASSWORD = "authuserpassword";
     protected static final String BASIC_CREDENTIALS = Base64.getEncoder()
             .encodeToString((AUTH_USER_EMAIL + ":" + AUTH_USER_PASSWORD).getBytes(StandardCharsets.UTF_8));
+    protected static User AUTH_USER = null;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final RestTestClient client;
@@ -38,6 +39,7 @@ public abstract class AuthTest extends IntegrationTest {
                 .password(passwordEncoder.encode(AUTH_USER_PASSWORD))
                 .build();
         userRepository.save(user);
+        AUTH_USER = user;
     }
 
     @AfterAll

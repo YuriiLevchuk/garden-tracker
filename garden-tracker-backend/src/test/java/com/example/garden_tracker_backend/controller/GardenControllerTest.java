@@ -1,6 +1,7 @@
 package com.example.garden_tracker_backend.controller;
 
 import com.example.garden_tracker_backend.dto.GardenRequest;
+import com.example.garden_tracker_backend.dto.GardenResponse;
 import com.example.garden_tracker_backend.security.JwtAuthenticationFilter;
 import com.example.garden_tracker_backend.service.GardenService;
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.client.RestTestClient;
 import tools.jackson.databind.ObjectMapper;
+
+import java.util.List;
 
 import static com.example.garden_tracker_backend.TestConstants.*;
 import static org.mockito.Mockito.when;
@@ -58,6 +61,49 @@ public class GardenControllerTest {
                 .uri("/api/gardens")
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(objectMapper.writeValueAsString(request))
+                .exchange();
+        response
+                .expectStatus().isBadRequest()
+                .expectBody().jsonPath("message").isNotEmpty();
+    }
+
+    @Test
+    public void whenGetAllGardens_thenStatusOk() {
+        var gardens = List.of(new GardenResponse(1L, TEST_GARDEN_NAME));
+        when(gardenService.getAllGardens()).thenReturn(gardens);
+        var response = client.get()
+                .uri("/api/gardens")
+                .exchange();
+        response
+                .expectStatus().isOk()
+                .expectBody().json(objectMapper.writeValueAsString(gardens));
+    }
+
+    @Test
+    public void givenValidGardenId_whenGetGarden_thenStatusOk() {
+        var garden = new GardenResponse(1L, TEST_GARDEN_NAME);
+        when(gardenService.getGarden(garden.id())).thenReturn(garden);
+        var response = client.get()
+                .uri("/api/gardens/" + garden.id())
+                .exchange();
+        response
+                .expectStatus().isOk()
+                .expectBody().json(objectMapper.writeValueAsString(garden));
+    }
+
+    @Test
+    public void givenNaNGardenId_whenGetGarden_thenStatusBadRequest() {
+        var response = client.get()
+                .uri("/api/gardens/invalid")
+                .exchange();
+        response
+                .expectStatus().isBadRequest();
+    }
+
+    @Test
+    public void givenNegativeGardenId_whenGetGarden_thenStatusBadRequest() {
+        var response = client.get()
+                .uri("/api/gardens/-1")
                 .exchange();
         response
                 .expectStatus().isBadRequest()

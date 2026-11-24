@@ -26,10 +26,9 @@ public class GardeningTask {
     @ManyToOne
     private Garden garden;
     @ManyToOne
-    @JoinColumn(name = "gardening_task_type")
     private GardeningTaskType gardeningTaskType;
     @ManyToMany
-    @JoinTable(name = "gardening_task_plant",
+    @JoinTable(name = "gardening_tasks_plants",
             joinColumns = @JoinColumn(name = "gardening_task_id"),
             inverseJoinColumns = @JoinColumn(name = "plant_id"))
     private List<Plant> plants;

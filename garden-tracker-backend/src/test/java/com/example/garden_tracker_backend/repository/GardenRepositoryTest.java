@@ -101,4 +101,51 @@ public class GardenRepositoryTest extends IntegrationTest {
         var result = gardenRepository.existsByNameAndUser(TEST_GARDEN_NAME, user2);
         assertFalse(result);
     }
+
+    @Test
+    public void givenGardenExists_whenExistsByIdAndUser_thenReturnTrue() {
+        var user = User.builder()
+                .email(TEST_EMAIL)
+                .password(TEST_PASSWORD)
+                .build();
+        var garden = Garden.builder()
+                .name(TEST_GARDEN_NAME)
+                .user(user)
+                .build();
+        userRepository.save(user);
+        var gardenId = gardenRepository.save(garden).getId();
+        var result = gardenRepository.existsByIdAndUser(gardenId, user);
+        assertTrue(result);
+    }
+
+    @Test
+    public void givenGardenNotExist_whenExistsByIdAndUser_thenReturnFalse() {
+        var user = User.builder()
+                .email(TEST_EMAIL)
+                .password(TEST_PASSWORD)
+                .build();
+        userRepository.save(user);
+        var result = gardenRepository.existsByIdAndUser(1L, user);
+        assertFalse(result);
+    }
+
+    @Test
+    public void givenGardenExistsWithDifferentUser_whenExistsByIdAndUser_thenReturnFalse() {
+        var user1 = User.builder()
+                .email(TEST_EMAIL)
+                .password(TEST_PASSWORD)
+                .build();
+        var user2 = User.builder()
+                .email("user2@email.com")
+                .password(TEST_PASSWORD)
+                .build();
+        var garden = Garden.builder()
+                .name(TEST_GARDEN_NAME)
+                .user(user1)
+                .build();
+        userRepository.saveAll(List.of(user1, user2));
+        var gardenId = gardenRepository.save(garden).getId();
+        var result = gardenRepository.existsByIdAndUser(gardenId, user2);
+        assertFalse(result);
+    }
 }
